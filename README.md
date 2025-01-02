@@ -1,6 +1,6 @@
-# helper
+# Chat-Bot(Helper)
 
-A new Flutter project.
+A Flutter Project inspired by chatgpt
 
 ## Getting Started
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:helper/providers/chat_provider.dart'; // Import the provider file
-import 'package:helper/services/api_service.dart'; // Import your API service class
+import 'package:helper/providers/chat_provider.dart';
+import 'package:helper/services/api_service.dart';
 import 'package:helper/widgets/chat_widget.dart';
 
 class ChatScreen extends ConsumerWidget {
@@ -10,20 +10,15 @@ class ChatScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chatMessages = ref.watch(chatMessagesProvider); // Watch chat messages
-    final _isTyping = ref.watch(isTypingProvider); // Watch the typing state
+    final chatMessages = ref.watch(chatMessagesProvider);
+    final _isTyping = ref.watch(isTypingProvider);
     final controller = TextEditingController();
-
     Future<void> sendMessage(String userInput) async {
-      // Add user input to chat messages
       ref
           .read(chatMessagesProvider.notifier)
           .addMessage({"msg": userInput, "chatIndex": 0});
-      ref.read(isTypingProvider.notifier).state =
-          true; // Set typing state to true
-
+      ref.read(isTypingProvider.notifier).state = true;
       try {
-        // Call API to get the response
         String response = await ApiService.getChatGPTResponse(userInput);
         ref
             .read(chatMessagesProvider.notifier)
@@ -32,8 +27,7 @@ class ChatScreen extends ConsumerWidget {
         ref.read(chatMessagesProvider.notifier).addMessage(
             {"msg": "Error: Unable to get a response.", "chatIndex": 1});
       } finally {
-        ref.read(isTypingProvider.notifier).state =
-            false; // Set typing state to false
+        ref.read(isTypingProvider.notifier).state = false;
       }
     }
 
@@ -44,9 +38,7 @@ class ChatScreen extends ConsumerWidget {
         title: const Text('HELPER'),
         actions: [
           IconButton(
-            onPressed: () {
-              // Add modal sheet or settings functionality
-            },
+            onPressed: () {},
             icon: const Icon(Icons.more_vert_rounded, color: Colors.black),
           )
         ],
@@ -54,7 +46,6 @@ class ChatScreen extends ConsumerWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Chat messages list
             Flexible(
               child: ListView.builder(
                 itemCount: chatMessages.length,
@@ -66,13 +57,11 @@ class ChatScreen extends ConsumerWidget {
                 },
               ),
             ),
-            // Typing indicator
             if (_isTyping)
               const SpinKitThreeBounce(
                 color: Colors.white,
                 size: 18,
               ),
-            // Input field and send button
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

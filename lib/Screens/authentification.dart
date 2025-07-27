@@ -7,7 +7,6 @@ class Authentification extends StatefulWidget {
     return _AuthentificationState();
   }
 }
-
 class _AuthentificationState extends State<Authentification> {
   final controller = TextEditingController();
   @override

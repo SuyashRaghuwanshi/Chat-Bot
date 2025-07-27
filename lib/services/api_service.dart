@@ -7,7 +7,8 @@ import 'package:http/http.dart' as http;
 class ApiService {
   static const String _baseUrl =
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-  static const String _apiKey = "AIzaSyCgpEfbi941v4Rf21E9yxlVkqZDa3Ni6rE";
+
+  static const String _apiKey = "AIzaSyCgpEfbi941v4Rf21E9yxlVkqZDa3Ni6r";
   static Future<String> getChatGPTResponse(String userInput) async {
     int retryCount = 0;
     const int maxRetries = 3;
